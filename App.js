@@ -13,8 +13,9 @@ class App extends Component {
   }
 
   _onPressButton() {
+    const ques = this.state.text
     const clientId = '09465ee0b43bf274a0c67732a9a8f75faad53b2495ee077947cf0fca6a68bfe5'
-    const url = 'https://api.unsplash.com/search/photos?page=1&query=cats&client_id=09465ee0b43bf274a0c67732a9a8f75faad53b2495ee077947cf0fca6a68bfe5'
+    const url = `https://api.unsplash.com/search/photos?page=1&query=${ques}&client_id=${clientId}`
 
     axios.get(url)
       .then((response) => {
@@ -22,6 +23,12 @@ class App extends Component {
           imgs: response.data.results
         })
       })
+
+    if (this.state.text == '') {
+      return(
+        alert('Please enter title name')
+      )
+    }
   }
 
   render() {
