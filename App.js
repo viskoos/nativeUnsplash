@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, TextInput, Text, Image} from 'react-native'
+import {ScrollView, TextInput, Text, Image, Button} from 'react-native'
 import axios from 'axios'
 
 const clientId = '09465ee0b43bf274a0c67732a9a8f75faad53b2495ee077947cf0fca6a68bfe5'
@@ -26,20 +26,21 @@ class App extends Component {
 
   render() {
     console.log(
-      this.state.imgs.map(items => items.urls.small)
+      this.state.text
     )
 
     return (
-      <View style={{justifyContent: "center", alignItems: 'center', paddingTop: 30, paddingLeft: 20, paddingRight: 20}}>
+      <ScrollView>
         <TextInput
+          style={{textAlign: 'center', paddingTop: 30, paddingLeft: 20, paddingRight: 20, marginBottom: 15}}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
           placeholder="Search photo"
         />
         {
-          this.state.imgs.map((items) => (<Image style={{width: 400, height: 400}} source={{uri: items.urls.small}} />))
+          this.state.imgs.map((items) => (<Image style={{width: 400, height: 400, marginBottom: 5}} source={{uri: items.urls.small}} />))
         }
-      </View>
+      </ScrollView>
     )
   }
 }
