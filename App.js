@@ -24,6 +24,9 @@ class App extends Component {
       })
   }
 
+  onPressButton() {
+  }
+
   render() {
     console.log(
       this.state.text
@@ -35,7 +38,11 @@ class App extends Component {
           style={{textAlign: 'center', paddingTop: 30, paddingLeft: 20, paddingRight: 20, marginBottom: 15}}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
-          placeholder="Search photo"
+          placeholder="What you want?"
+        />
+        <Button
+          onPress={this.onPressButton}
+          title="Search"
         />
         {
           this.state.imgs.map((items) => (<Image style={{width: 400, height: 400, marginBottom: 5}} source={{uri: items.urls.small}} />))
