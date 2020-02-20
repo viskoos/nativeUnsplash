@@ -18,11 +18,17 @@ class App extends Component {
   componentDidMount() {
     axios.get(url)
       .then((response) => {
-        console.log(response)
+        this.setState({
+          imgs: response.data.results
+        })
       })
   }
 
   render() {
+    console.log(
+      this.state.imgs.map(items => items.urls.small)
+    )
+
     return (
       <View style={{justifyContent: "center", alignItems: 'center', paddingTop: 30, paddingLeft: 20, paddingRight: 20}}>
         <TextInput
@@ -30,8 +36,9 @@ class App extends Component {
           value={this.state.text}
           placeholder="Search photo"
         />
-        <Text >
-        </Text>
+        {
+          this.state.imgs.map((items) => (<Image style={{width: 400, height: 400}} source={{uri: items.urls.small}} />))
+        }
       </View>
     )
   }
