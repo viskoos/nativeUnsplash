@@ -2,9 +2,6 @@ import React, {Component} from 'react'
 import {ScrollView, TextInput, Text, Image, Button} from 'react-native'
 import axios from 'axios'
 
-const clientId = '09465ee0b43bf274a0c67732a9a8f75faad53b2495ee077947cf0fca6a68bfe5'
-const url = 'https://api.unsplash.com/search/photos?page=1&query=cats&client_id=09465ee0b43bf274a0c67732a9a8f75faad53b2495ee077947cf0fca6a68bfe5'
-
 class App extends Component {
   constructor(){
     super()
@@ -15,16 +12,16 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
+  _onPressButton() {
+    const clientId = '09465ee0b43bf274a0c67732a9a8f75faad53b2495ee077947cf0fca6a68bfe5'
+    const url = 'https://api.unsplash.com/search/photos?page=1&query=cats&client_id=09465ee0b43bf274a0c67732a9a8f75faad53b2495ee077947cf0fca6a68bfe5'
+
     axios.get(url)
       .then((response) => {
         this.setState({
           imgs: response.data.results
         })
       })
-  }
-
-  onPressButton() {
   }
 
   render() {
@@ -41,11 +38,11 @@ class App extends Component {
           placeholder="What you want?"
         />
         <Button
-          onPress={this.onPressButton}
+          onPress={() => this._onPressButton()}
           title="Search"
         />
         {
-          this.state.imgs.map((items) => (<Image style={{width: 400, height: 400, marginBottom: 5}} source={{uri: items.urls.small}} />))
+          this.state.imgs.map((items, index) => (<Image key={index} style={{width: 400, height: 400, marginBottom: 5}} source={{uri: items.urls.small}} />))
         }
       </ScrollView>
     )
